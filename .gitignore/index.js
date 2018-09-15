@@ -14,12 +14,12 @@ bot.on('ready', () => {
 });
 
 bot.on('guildMemberAdd', member =>{
-    let role = member.guild.roles.find("name", "Mousse");
+    let role = member.guild.roles.find(roles => roles.name, "Mousse");
     const embed = new Discord.RichEmbed()
     .setTitle('Nouvel Arrivant')
     .setColor(0x000F84)
     .addField(`Hey ! Bienvenue à bord ${member} ! Tu es ici sur le serveur dicord de la communauté ${member.guild.name}, tu es invité à lire le #reglement et à faire une petite afin que l'on te connaisse un peu plus !`)
-    member.guild.channels.find("name", "accueil").send(embed);
+    member.guild.channels.find(channel => channel.name, "accueil").send(embed);
     member.addRole(role);
 });
 
@@ -60,9 +60,9 @@ bot.on('message', message => {
 
         listeRole.forEach(function(element){
             if(message.content.toLowerCase() === prefix + "game " + element.toLowerCase()){
-                let roleAssign = message.member.guild.roles.find("name", element);
+                let roleAssign = message.member.guild.roles.find(role => role.name, element);
                 
-                if(!message.member.roles.find("name", element)){
+                if(!message.member.roles.find(roles => roles.name, element)){
                     var roleEmbed = new Discord.RichEmbed()
                     .setTitle('Jeu Ajouté')
                     .setColor(0x00a51b)
