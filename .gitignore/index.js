@@ -54,7 +54,8 @@ bot.on('message', message => {
             "Hearthstone",
             "GTA V",
             "Rainbow 6 : Siege",
-            "War Thunder"
+            "War Thunder",
+            "Mousse"
         ];
 
         listeRole.forEach(function(element){
