@@ -17,7 +17,8 @@ bot.on('guildMemberAdd', member =>{
     const embed = new Discord.RichEmbed()
     .setTitle('Nouvel Arrivant')
     .setColor(0x000F84)
-    .addField(`Hey ! Bienvenue à bord ${member} ! Tu es ici sur le serveur dicord de la communauté ${member.guild.name}, tu es invité à lire le #reglement et à faire une petite afin que l'on te connaisse un peu plus !`)
+    .setAuthor("Bienvenue à Bord !!", message.author.avatarURL)
+    .addField(`Hey ! Salut à toi, ${member} ! Tu es ici sur le serveur dicord de la communauté ${member.guild.name}, tu es invité à lire le #reglement et à faire une petite afin que l'on te connaisse un peu plus !`)
     member.guild.channels.find("name", "accueil").send(embed);
     member.addRole(role);
 });
@@ -32,8 +33,9 @@ bot.on('message', message => {
         .setTitle('Help')
         .setColor(0x000F84)
         .setDescription('Recapitulatif des Commandes d\'Octobot !')
-        .addField("Commande Attribution Rank" , "Les commandes pour s'attribuer ou retirer un jeu est *::game* suivit du jeu (**::jeux** pour afficher les jeux disponibles), les majuscules ne sont pas prises en compte")
-        .addField("Exemple :", "::game overwatch");
+        .addField("Préfixe pour utiliser le bot", "Le préfixe à utiliser avec le bot pour toutes les commandes est **::**")
+        .addField("::game" , "Les commandes pour s'attribuer ou retirer un jeu, les majuscules ne sont pas prises en compte Exemple: *::game overwatch*")
+        .addField("::jeu", "La commande pour afficher les jeux disponibles sur le Discord");
         message.channel.send(helpEmbed);
     }
 
