@@ -9,7 +9,7 @@ const adapter = new FileSync('database.json');
 const db = low(adapter); // Base de donnée
 
 bot.on('ready', () => {
-    bot.user.setActivity('Prépare la planche', {type: 'PLAYING'}); // Assignation du jeu auquel joue au bot
+    bot.user.setActivity('Imiter le Kraken', {type: 'PLAYING'}); // Assignation du jeu auquel joue au bot
 });
 
 bot.on('guildMemberAdd', member =>{
