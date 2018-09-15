@@ -25,11 +25,6 @@ bot.on('guildMemberAdd', member =>{
 bot.on('message', message => {
 
     if(!message.content.startsWith(prefix)) return; // Si le message ne commence pas par le préfixe on ignore
-    
-    if(message.content === prefix + 'ping'){
-    message.reply('pong reply'); // Répond avec le nom en @
-    message.channel.send('pong channel.send'); // Répond sans le nom
-    }
 
     // Récapitulatif des commandes disponible pour le bot
     if(message.content === prefix + 'help'){
@@ -39,6 +34,42 @@ bot.on('message', message => {
         .setDescription('Recapitulatif des Commandes d\'Octobot !')
         .addField("Commande Attribution Rank" , "Overwatch ::overwatch");
         message.channel.send(helpEmbed);
+    }
+    
+    // Aquisition et perte des ranks
+    if(message.content === prefix + "role"){
+        var listeRole = [
+            "Rocket League",
+            "League of Legend",
+            "For Honor",
+            "Overwatch",
+            "PUBG",
+            "Paladin",
+            "Fortnite",
+            "World of Warcraft",
+            "CSGO",
+            "Brawlhalla",
+            "Battlefield 1",
+            "Monster Hunter World",
+            "Hearthstone",
+            "GTA V",
+            "Rainbow 6 : Siege",
+            "War Thunder"
+        ];
+
+        listeRole.forEach(function(element){
+            if(message.content.toLowerCase === prefix + "role " + element.toLowerCase){
+                let roleAssign = message.guild.roles.find("name", element);
+
+                if(!message.member.roles.find(element)){
+                    message.member.addRole(element);
+                    message.channel.send(`Bravo <@${message.user.id}> ! Tu possèdes désormais le jeu ${element.name} !!`)
+                }else{
+                    message.member.removeRole(element);
+                    message.channel.send(`Pale sans bleu <@${message.user.id}> ! Tu ne possèdes désormais le jeu ${element.name} !!`)
+                }
+            }
+        });
     }
 });
 
