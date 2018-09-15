@@ -64,17 +64,17 @@ bot.on('message', message => {
                 
                 if(!message.member.roles.find("name", element)){
                     var roleEmbed = new Discord.RichEmbed()
-                    .setTitle('Auto-Assignation Rôle')
+                    .setTitle('Jeu Ajouté')
                     .setColor(0x00a51b)
-                    .setAuthor("Jeu Ajouté", message.author.avatarURL)
+                    .setAuthor("Assignation des Jeux", message.author.avatarURL)
                     .setDescription(`Bravo ! Tu as été ajouté à la liste des joueurs de **${element}** !!`);
                     message.channel.send(roleEmbed);
                     message.member.addRole(roleAssign);
                 }else{
                     var roleEmbed = new Discord.RichEmbed()
-                    .setTitle('Auto-Assignation Rôle')
+                    .setTitle('Jeu Retiré')
                     .setColor(0xfc0043)
-                    .setAuthor("Jeu Retiré", message.author.avatarURL)
+                    .setAuthor("Assignation des Jeux", message.author.avatarURL)
                     .setDescription(`Pale sans bleu ! Tu as été retiré de la liste des joueurs de **${element}** !!`);
                     message.channel.send(roleEmbed);
                     message.member.removeRole(roleAssign);
