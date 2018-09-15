@@ -17,8 +17,7 @@ bot.on('guildMemberAdd', member =>{
     const embed = new Discord.RichEmbed()
     .setTitle('Nouvel Arrivant')
     .setColor(0x000F84)
-    .setAuthor("Bienvenue à Bord !!", message.author.avatarURL)
-    .addField(`Hey ! Salut à toi, ${member} ! Tu es ici sur le serveur dicord de la communauté ${member.guild.name}, tu es invité à lire le #reglement et à faire une petite afin que l'on te connaisse un peu plus !`)
+    .addField(`Hey ! Bienvenue à bord ${member} ! Tu es ici sur le serveur dicord de la communauté ${member.guild.name}, tu es invité à lire le #reglement et à faire une petite afin que l'on te connaisse un peu plus !`)
     member.guild.channels.find("name", "accueil").send(embed);
     member.addRole(role);
 });
