@@ -1,6 +1,5 @@
 const Discord = require('discord.js'); // Récupération de la bibliothèque discord
 const bot = new Discord.Client(); // Création du client bot discord
-const token = 'NDg5NTM4NDY5MTA2ODEwODg0.DnxG9w.DwtMmOrmfQjYDwir9FR_WxPqPWY'; // Token de connexion
 const prefix = '::'; // Préfixe utiliser pour les commandes
 
 // Création de la base de donnée
@@ -43,4 +42,4 @@ bot.on('message', message => {
     }
 });
 
-bot.login(token);
+bot.login(process.env.TOKEN);
