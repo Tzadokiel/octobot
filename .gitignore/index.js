@@ -1,3 +1,4 @@
+
 const Discord = require('discord.js'); // Récupération de la bibliothèque discord
 const bot = new Discord.Client(); // Création du client bot discord
 const prefix = '::'; // Préfixe utiliser pour les commandes
@@ -17,14 +18,14 @@ bot.on('guildMemberAdd', member =>{
     const embed = new Discord.RichEmbed()
     .setTitle('Nouvel Arrivant')
     .setColor(0x000F84)
-    .addField(`Hey ! Bienvenue à bord ${member.user.username} ! Tu es ici sur le serveur dicord de la communauté ${member.guild.name}, tu es invité à lire le #reglement et à faire une petite afin que l'on te connaisse un peu plus !`)
+    .addField(`Hey ! Bienvenue à bord ${member} ! Tu es ici sur le serveur dicord de la communauté ${member.guild.name}, tu es invité à lire le #reglement et à faire une petite afin que l'on te connaisse un peu plus !`)
     member.guild.channels.find("name", "accueil").send(embed);
     member.addRole(role);
 });
 
 bot.on('message', message => {
 
-    if(!message.content.startsWith(prefix)) return; // Si le message ne commence pas par le préfixe on ignore
+    if(!message.content.startsWith(prefix) || message.author.bot) return; // Si le message ne commence pas par le préfixe ou que c'est le bot on ignore
 
     // Récapitulatif des commandes disponible pour le bot
     if(message.content === prefix + 'help'){
@@ -35,9 +36,9 @@ bot.on('message', message => {
         .addField("Commande Attribution Rank" , "Overwatch ::overwatch");
         message.channel.send(helpEmbed);
     }
-    
+
     // Aquisition et perte des ranks
-            var listeRole = [
+        var listeRole = [
             "Rocket League",
             "League of Legend",
             "For Honor",
