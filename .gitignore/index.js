@@ -59,14 +59,14 @@ bot.on('message', message => {
         ];
 
         listeRole.forEach(function(element){
-            if(message.content.toLowerCase() === prefix + "role " + element.toLowerCase()){
+            if(message.content.toLowerCase() === prefix + "game " + element.toLowerCase()){
                 let roleAssign = message.member.guild.roles.find("name", element);
                 
                 if(!message.member.roles.find("name", element)){
                     var roleEmbed = new Discord.RichEmbed()
                     .setTitle('Auto-Assignation Rôle')
                     .setColor(0x00a51b)
-                    .setAuthor(":: role", message.author.avatarURL)
+                    .setAuthor("Jeu Ajouté", message.author.avatarURL)
                     .setDescription(`Bravo ! Tu as été ajouté à la liste des joueurs de **${element}** !!`);
                     message.channel.send(roleEmbed);
                     message.member.addRole(roleAssign);
@@ -74,7 +74,7 @@ bot.on('message', message => {
                     var roleEmbed = new Discord.RichEmbed()
                     .setTitle('Auto-Assignation Rôle')
                     .setColor(0xfc0043)
-                    .setAuthor(":: role", message.author.avatarURL)
+                    .setAuthor("Jeu Retiré", message.author.avatarURL)
                     .setDescription(`Pale sans bleu ! Tu as été retiré de la liste des joueurs de **${element}** !!`);
                     message.channel.send(roleEmbed);
                     message.member.removeRole(roleAssign);
