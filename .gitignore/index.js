@@ -37,8 +37,7 @@ bot.on('message', message => {
     }
     
     // Aquisition et perte des ranks
-    if(message.content === prefix + "role"){
-        var listeRole = [
+            var listeRole = [
             "Rocket League",
             "League of Legend",
             "For Honor",
@@ -59,19 +58,28 @@ bot.on('message', message => {
         ];
 
         listeRole.forEach(function(element){
-            if(message.content.toLowerCase === prefix + "role " + element.toLowerCase){
-                let roleAssign = message.guild.roles.find("name", element);
-
-                if(!message.member.roles.find(element)){
-                    message.member.addRole(element);
-                    message.channel.send(`Bravo <@${message.user.id}> ! Tu possèdes désormais le jeu ${element.name} !!`)
+            if(message.content.toLowerCase() === prefix + "role " + element.toLowerCase()){
+                let roleAssign = message.member.guild.roles.find("name", element);
+                
+                if(!message.member.roles.find("name", element)){
+                    var roleEmbed = new Discord.RichEmbed()
+                    .setTitle('Auto-Assignation Rôle')
+                    .setColor(0x00a51b)
+                    .setAuthor(":: role", message.author.avatarURL)
+                    .setDescription(`Bravo ! Tu as été ajouté à la liste des joueurs de **${element}** !!`);
+                    message.channel.send(roleEmbed);
+                    message.member.addRole(roleAssign);
                 }else{
-                    message.member.removeRole(element);
-                    message.channel.send(`Pale sans bleu <@${message.user.id}> ! Tu ne possèdes désormais le jeu ${element.name} !!`)
+                    var roleEmbed = new Discord.RichEmbed()
+                    .setTitle('Auto-Assignation Rôle')
+                    .setColor(0xfc0043)
+                    .setAuthor(":: role", message.author.avatarURL)
+                    .setDescription(`Pale sans bleu ! Tu as été retiré de la liste des joueurs de **${element}** !!`);
+                    message.channel.send(roleEmbed);
+                    message.member.removeRole(roleAssign);
                 }
             }
         });
-    }
 });
 
 bot.login(process.env.TOKEN);
