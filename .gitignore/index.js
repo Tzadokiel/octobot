@@ -25,6 +25,15 @@ bot.on('guildMemberAdd', member =>{
     member.addRole(role);
 });
 
+bot.on('guildMemberRemove', member =>{
+    const embed = new Discord.RichEmbed()
+    .setTitle('Départ')
+    .setColor(0x000F84)
+    .setAuthor("Un utilisateur a quitté le serveur", member.user.avatarURL)
+    .setDescription(`${member.user} s'est barré !!`)
+    member.guild.channels.find("name", "administration").send(embed);
+});
+
 bot.on('message', message => {
 
     if(!message.content.startsWith(prefix) || message.author.bot) return; // Si le message ne commence pas par le préfixe ou que c'est le bot on ignore
