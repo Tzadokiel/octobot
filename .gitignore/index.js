@@ -14,8 +14,8 @@ bot.on('ready', () => {
 
 bot.on('guildMemberAdd', member =>{
     let role = member.guild.roles.find("name", "Mousse");
-    var reglement = message.member.guild.channels.find("name", "reglement");
-    var presentation = message.member.guild.channels.find("name", "presentation");
+    var reglement = member.guild.channels.find("name", "reglement");
+    var presentation = member.guild.channels.find("name", "presentation");
     const embed = new Discord.RichEmbed()
     .setTitle('Nouvel Arrivant')
     .setColor(0x000F84)
