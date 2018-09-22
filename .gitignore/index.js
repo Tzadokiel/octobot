@@ -14,11 +14,13 @@ bot.on('ready', () => {
 
 bot.on('guildMemberAdd', member =>{
     let role = member.guild.roles.find("name", "Mousse");
+    var reglement = message.member.guild.channels.find("name", "reglement");
+    var presentation = message.member.guild.channels.find("name", "presentation");
     const embed = new Discord.RichEmbed()
     .setTitle('Nouvel Arrivant')
     .setColor(0x000F84)
     .setAuthor("Bienvenue à bord !", member.user.avatarURL)
-    .setDescription(`Hey ! Salut à toi ${member.user} ! Tu es ici sur le serveur dicord de la communauté ${member.guild.name}, tu es invité à lire le #reglement et à faire une petite #presentation afin que l'on te connaisse un peu plus !`)
+    .setDescription(`Hey ! Salut à toi ${member.user} ! Tu es ici sur le serveur dicord de la communauté ${member.guild.name}, tu es invité à lire le ${reglement} et à faire une petite ${presentation} afin que l'on te connaisse un peu plus !`)
     member.guild.channels.find("name", "accueil").send(embed);
     member.addRole(role);
 });
