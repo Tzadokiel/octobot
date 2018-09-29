@@ -13,7 +13,8 @@ bot.on('ready', () => {
 });
 
 bot.on('guildMemberAdd', member =>{
-    let role = member.guild.roles.find("name", "Mousse");
+    var roleParDefaut = "Mousse";
+    let role = member.guild.roles.find("name", roleParDefaut);
     var reglement = member.guild.channels.find("name", "reglement");
     var presentation = member.guild.channels.find("name", "presentation");
     const embed = new Discord.RichEmbed()
