@@ -96,7 +96,7 @@ var msgAuthor = message.author.id;
         .setDescription('Recapitulatif des Commandes d\'Octobot !')
         .addField("Préfixe pour utiliser le bot", "Le préfixe à utiliser avec le bot pour toutes les commandes est **::**")
         .addField("::game" , "Les commandes pour s'attribuer ou retirer un jeu, les majuscules ne sont pas prises en compte Exemple: *::game overwatch*")
-        .addField("::jeu", "La commande pour afficher les jeux disponibles sur le Discord");
+        .addField("::jeux", "La commande pour afficher les jeux disponibles sur le Discord");
         message.channel.send(helpEmbed);
     }
 
