@@ -32,7 +32,16 @@ bot.on('guildMemberAdd', member =>{
 });
 
 bot.on('guildMemberRemove', member =>{
-        var msgAuthor = message.author.id;
+    const embed = new Discord.RichEmbed()
+    .setTitle('Départ')
+    .setColor(0x000F84)
+    .setAuthor("Un utilisateur a quitté le serveur", member.user.avatarURL)
+    .setDescription(`${member.user} s'est barré !!`)
+    member.guild.channels.find("name", "administration").send(embed);
+});
+
+bot.on('message', message => {
+    var msgAuthor = message.author.id;
 
     const embedNonDroit = new Discord.RichEmbed()
             .setTitle('Erreur')
@@ -171,7 +180,7 @@ bot.on('guildMemberRemove', member =>{
         message.channel.send(roleEmbed)
     }
 
- // Gestion des warns 
+    // Gestion des warns 
     if(message.content.split(" ")[0] === prefix + "warn"){
         var userWarn = message.mentions.users.first(); // Utilisateur à Warn
         if(message.member.hasPermission('ADMINISTRATOR')){
