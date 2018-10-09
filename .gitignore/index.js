@@ -8,6 +8,8 @@ const FileSync = require('lowdb/adapters/FileSync');
 const adapter = new FileSync('database.json');
 const db = low(adapter); // Base de donnée
 
+db.defaults({utilisateur: []}).write();
+
 bot.on('ready', () => {
     bot.user.setActivity('Imiter le Kraken', {type: 'PLAYING'}); // Assignation du jeu auquel joue au bot
 });
