@@ -218,6 +218,44 @@ var msgAuthor = message.author.id;
             message.channel.send(embedNonDroit);
         }
     }
+    
+    // Retrait d'un avertissement
+    if(message.content.split(" ")[0] === prefix + "unwarn"){
+        var userunWarn = message.mentions.users.first(); // Utilisateur à Warn
+        if(message.member.hasPermission('ADMINISTRATOR')){
+            var userunWarnId = userunWarn.id; // ID de l'utilisateur que l'on va warn
+            const embedunRetour = new Discord.RichEmbed();
+            var nombreunWarn = db.get("utilisateur").filter({user: userunWarnId}).find("warn").value();
+            var objetNombreunWarn = Object.values(nombreunWarn);
+            var afficheunWarnNumber = objetNombreunWarn[2] - 1; // On met -1 car le nombre de Warn ne peut pas être à 0 donc il est à 1 par défaut
+
+            if(db.get("utilisateur").find({user: userunWarnId}).value()){
+                var userunWarnDb = db.get("utilisateur").filter({user: userunWarnId}).find("warn").value(); // Récupération de l'objet Warn
+                var unwarnNumber = Object.values(userunWarnDb); // On cast l'objet
+        
+                db.get("utilisateur").find({user: userunWarnId}).assign({warn: unwarnNumber[2] -= 1}).write(); // On ajoute 1 à l'utilisateur
+
+                embedunRetour
+                .setTitle('Avertissement retiré')
+                .setColor(0xfc0043)
+                .setAuthor("L'avertissement a bien été retiré", userunWarn.avatarURL)
+                .setDescription(`L'utilisateur ${userunWarn} a eu un Warn retiré et a actuellement ${afficheunWarnNumber} avertissements !`);
+            }
+            else{
+                embedunRetour
+                .setTitle('Impossible d\'enlever un Avertissement')
+                .setColor(0xfc0043)
+                .setAuthor("Utilisateur n'a pas d'avertissement", userunWarn.avatarURL)
+                .setDescription(`L'utilisateur ${userunWarn} n'a pas d'avertissement, on ne peut donc pas lui en retirer !`);
+            }
+
+            // Message de retour affiché dans le channel dans lequel le Warn a été fait 
+
+                message.channel.send(embedunRetour);
+        }else{
+            message.channel.send(embedNonDroit);
+        }
+    }
 });
 
 bot.login(process.env.TOKEN);
