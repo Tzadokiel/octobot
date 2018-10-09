@@ -55,7 +55,7 @@ var msgAuthor = message.author.id;
         var userXpDb = db.get("utilisateur").filter({user: msgAuthor}).find('xp').value();
         var userXp = Object.values(userXpDb);
 
-        db.get("utilisateur").find({user: msgAuthor}).assign({xp: userXp[1] += 1}).write();
+        db.get("utilisateur").find({user: msgAuthor}).assign({xp: userXp[1] += 20}).write();
     }
 
     if(!message.content.startsWith(prefix)) return;
