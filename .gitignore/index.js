@@ -171,15 +171,18 @@ bot.on('guildMemberRemove', member =>{
         message.channel.send(roleEmbed)
     }
 
-    // Gestion des warns 
+ // Gestion des warns 
     if(message.content.split(" ")[0] === prefix + "warn"){
         var userWarn = message.mentions.users.first(); // Utilisateur à Warn
         if(message.member.hasPermission('ADMINISTRATOR')){
             var userWarnId = userWarn.id; // ID de l'utilisateur que l'on va warn
 
-            if(!db.get("utilisateur").find({user: userWarnId}).value() || db.get("utilisateur").filter({user: userWarnId}).find("warn").value() == null || db.get("utilisateur").filter({user: userWarnId}).find("warn").value() == undefined){
+            if(!db.get("utilisateur").find({user: userWarnId}).value()){
                 db.get("utilisateur").push({user: userWarnId, xp: 1, warn: 2}).write();
-            }else{
+            }
+            else if(db.get("utilisateur").filter({user: userWarnId}).find("warn").value() == null || db.get("utilisateur").filter({user: userWarnId}).find("warn").value() == undefined){
+                db.get("utilisateur").find({user: userWarnId}).assign({warn: 2}).write()
+            } else{
                 var userWarnDb = db.get("utilisateur").filter({user: userWarnId}).find("warn").value(); // Récupération de l'objet Warn
                 var warnNumber = Object.values(userWarnDb); // On cast l'objet
         
@@ -222,12 +225,12 @@ bot.on('guildMemberRemove', member =>{
             var afficheunWarnNumber = null;
             if(db.get("utilisateur").filter({user: userunWarnId}).find("warn").value() != undefined && db.get("utilisateur").filter({user: userunWarnId}).find("warn").value() != null){
                 objetNombreunWarn =  Object.values(nombreunWarn);
-                afficheunWarnNumber = objetNombreunWarn[2] - 1
+                afficheunWarnNumber = objetNombreunWarn[2] - 2;
             } else{
                 afficheunWarnNumber = 0;
             }
 
-            if(db.get("utilisateur").find({user: userunWarnId}).value() && db.get("utilisateur").filter({user: userunWarnId}).find("warn").value() != null && db.get("utilisateur").filter({user: userunWarnId}).find("warn").value() != undefined){
+            if(db.get("utilisateur").find({user: userunWarnId}).value() && db.get("utilisateur").filter({user: userunWarnId}).find("warn").value() != null && db.get("utilisateur").filter({user: userunWarnId}).find("warn").value() != undefined && db.get("utilisateur").filter({user: userunWarnId}).find("warn").value() != 1){
                 var userunWarnDb = db.get("utilisateur").filter({user: userunWarnId}).find("warn").value(); // Récupération de l'objet Warn
                 var unwarnNumber = Object.values(userunWarnDb); // On cast l'objet
         
