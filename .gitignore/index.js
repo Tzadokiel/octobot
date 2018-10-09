@@ -32,16 +32,7 @@ bot.on('guildMemberAdd', member =>{
 });
 
 bot.on('guildMemberRemove', member =>{
-    const embed = new Discord.RichEmbed()
-    .setTitle('Départ')
-    .setColor(0x000F84)
-    .setAuthor("Un utilisateur a quitté le serveur", member.user.avatarURL)
-    .setDescription(`${member.user} s'est barré !!`)
-    member.guild.channels.find("name", "administration").send(embed);
-});
-
-bot.on('message', message => {
-var msgAuthor = message.author.id;
+        var msgAuthor = message.author.id;
 
     const embedNonDroit = new Discord.RichEmbed()
             .setTitle('Erreur')
@@ -186,7 +177,7 @@ var msgAuthor = message.author.id;
         if(message.member.hasPermission('ADMINISTRATOR')){
             var userWarnId = userWarn.id; // ID de l'utilisateur que l'on va warn
 
-            if(!db.get("utilisateur").find({user: userWarnId}).value()){
+            if(!db.get("utilisateur").find({user: userWarnId}).value() || db.get("utilisateur").filter({user: userWarnId}).find("warn").value() == null || db.get("utilisateur").filter({user: userWarnId}).find("warn").value() == undefined){
                 db.get("utilisateur").push({user: userWarnId, xp: 1, warn: 2}).write();
             }else{
                 var userWarnDb = db.get("utilisateur").filter({user: userWarnId}).find("warn").value(); // Récupération de l'objet Warn
@@ -218,18 +209,25 @@ var msgAuthor = message.author.id;
             message.channel.send(embedNonDroit);
         }
     }
-    
+
     // Retrait d'un avertissement
     if(message.content.split(" ")[0] === prefix + "unwarn"){
         var userunWarn = message.mentions.users.first(); // Utilisateur à Warn
         if(message.member.hasPermission('ADMINISTRATOR')){
             var userunWarnId = userunWarn.id; // ID de l'utilisateur que l'on va warn
             const embedunRetour = new Discord.RichEmbed();
-            var nombreunWarn = db.get("utilisateur").filter({user: userunWarnId}).find("warn").value();
-            var objetNombreunWarn = Object.values(nombreunWarn);
-            var afficheunWarnNumber = objetNombreunWarn[2] - 1; // On met -1 car le nombre de Warn ne peut pas être à 0 donc il est à 1 par défaut
 
-            if(db.get("utilisateur").find({user: userunWarnId}).value()){
+            var nombreunWarn = db.get("utilisateur").filter({user: userunWarnId}).find("warn").value();
+            var objetNombreunWarn = null; 
+            var afficheunWarnNumber = null;
+            if(db.get("utilisateur").filter({user: userunWarnId}).find("warn").value() != undefined && db.get("utilisateur").filter({user: userunWarnId}).find("warn").value() != null){
+                objetNombreunWarn =  Object.values(nombreunWarn);
+                afficheunWarnNumber = objetNombreunWarn[2] - 1
+            } else{
+                afficheunWarnNumber = 0;
+            }
+
+            if(db.get("utilisateur").find({user: userunWarnId}).value() && db.get("utilisateur").filter({user: userunWarnId}).find("warn").value() != null && db.get("utilisateur").filter({user: userunWarnId}).find("warn").value() != undefined){
                 var userunWarnDb = db.get("utilisateur").filter({user: userunWarnId}).find("warn").value(); // Récupération de l'objet Warn
                 var unwarnNumber = Object.values(userunWarnDb); // On cast l'objet
         
@@ -240,18 +238,16 @@ var msgAuthor = message.author.id;
                 .setColor(0xfc0043)
                 .setAuthor("L'avertissement a bien été retiré", userunWarn.avatarURL)
                 .setDescription(`L'utilisateur ${userunWarn} a eu un Warn retiré et a actuellement ${afficheunWarnNumber} avertissements !`);
-            }
-            else{
+            } else{
                 embedunRetour
                 .setTitle('Impossible d\'enlever un Avertissement')
                 .setColor(0xfc0043)
                 .setAuthor("Utilisateur n'a pas d'avertissement", userunWarn.avatarURL)
                 .setDescription(`L'utilisateur ${userunWarn} n'a pas d'avertissement, on ne peut donc pas lui en retirer !`);
             }
-
+   
             // Message de retour affiché dans le channel dans lequel le Warn a été fait 
-
-                message.channel.send(embedunRetour);
+            message.channel.send(embedunRetour);
         }else{
             message.channel.send(embedNonDroit);
         }
