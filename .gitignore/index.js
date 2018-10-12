@@ -120,6 +120,7 @@ bot.on('message', message => {
         "GTA V",
         "Rainbow 6 : Siege",
         "War Thunder",
+        "Sea of Thieves",
         "Mousse"
     ];
 
