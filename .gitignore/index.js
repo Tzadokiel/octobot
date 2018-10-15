@@ -22,7 +22,7 @@ bot.on('guildMemberAdd', member =>{
     .setTitle('Nouvel Arrivant')
     .setColor(0x000F84)
     .setAuthor("Bienvenue à Bord !!", member.user.avatarURL)
-    .setDescription(`Hey ! Salut à toi, ${member.user} ! Tu es ici sur le serveur dicord de la communauté ${member.guild.name}, tu es invité à lire le ${reglement} et à faire une petite ${presentation} afin que l'on te connaisse un peu plus !`);
+    .setDescription(`Hey ! Salut à toi, ${member.user} ! Tu es ici sur le serveur discord de la communauté ${member.guild.name}, tu es invité à lire le ${reglement} et à faire une petite ${presentation} afin que l'on te connaisse un peu plus !`);
     member.guild.channels.find("name", "accueil").send(embed);
     member.addRole(role);
     
