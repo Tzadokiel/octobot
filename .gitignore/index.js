@@ -265,6 +265,17 @@ bot.on('message', message => {
             message.channel.send(embedNonDroit);
         }
     }
+    
+        if(message.content === prefix + 'online'){
+        var nombreMembreTot = message.guild.members.size;
+        var nombreMembreCo = message.guild.members.filter(m=> m.presence.status === 'online').size;
+        var membreCOEmbed = new Discord.RichEmbed()
+        .setTitle('Qui est connecté ?')
+        .setAuthor(message.guild.name, message.guild.iconURL)
+        .setColor(0x000F84)
+        .setDescription(`Actuellement il y a ${nombreMembreCo}/${nombreMembreTot} membres en ligne sur le serveur ${message.guild.name} !`);
+        message.channel.send(membreCOEmbed);
+    }
 });
 
 bot.login(process.env.TOKEN);
