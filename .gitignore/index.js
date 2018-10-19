@@ -75,21 +75,6 @@ bot.on('message', message => {
         message.channel.send(embedXp);
     }
 
-    //Test de nouvelle features
-    if(message.content === prefix + 'test'){
-        var roleParDefaut = "Mousse";
-        let role = message.member.guild.roles.find("name", roleParDefaut);
-        var reglement = message.member.guild.channels.find("name", "reglement");
-        var presentation = message.member.guild.channels.find("name", "presentation");
-        const embed = new Discord.RichEmbed()
-        .setTitle('Nouvel Arrivant')
-        .setColor(0x000F84)
-        .setAuthor("Bienvenue à Bord !!", message.member.user.avatarURL)
-        .setDescription(`Hey ! Salut à toi, ${message.member.user} ! Tu es ici sur le serveur dicord de la communauté ${message.member.guild.name}, tu es invité à lire le ${reglement} et à faire une petite ${presentation} afin que l'on te connaisse un peu plus !`)
-        message.member.guild.channels.find("name", "accueil").send(embed);
-        message.member.addRole(role);
-    }
-
     // Récapitulatif des commandes disponible pour le bot
     if(message.content === prefix + 'help'){
         var helpEmbed = new Discord.RichEmbed()
