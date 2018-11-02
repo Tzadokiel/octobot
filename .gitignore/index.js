@@ -106,6 +106,7 @@ bot.on('message', message => {
         "Rainbow 6 : Siege",
         "War Thunder",
         "Sea of Thieves",
+        "Black Ops 4",
         "Mousse"
     ];
 
