@@ -104,7 +104,7 @@ bot.on('message', message => {
         "Hearthstone",
         "GTA V",
         "Rainbow 6 : Siege",
-        "War Thunder",
+        "Apex Legends",
         "Sea of Thieves",
         "Black Ops 4",
         "Mousse"
