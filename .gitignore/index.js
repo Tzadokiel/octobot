@@ -38,6 +38,7 @@ bot.on('guildMemberRemove', member =>{
     .setAuthor("Un utilisateur a quitté le serveur", member.user.avatarURL)
     .setDescription(`${member.user} s'est barré !!`)
     member.guild.channels.find("name", "administration").send(embed);
+    member.guild.channels.find("name", "quartier-maître").send(embed);
 });
 
 bot.on('message', message => {
