@@ -15,7 +15,7 @@ bot.on('ready', () => {
 });
 
 bot.on('guildMemberAdd', member =>{
-    var role = member.guild.roles.find("name", "Docker");
+    var role = member.guild.roles.find('name', 'Docker');
     var reglement = member.guild.channels.find("name", "reglement");
     var presentation = member.guild.channels.find("name", "presentation");
     const embed = new Discord.RichEmbed()
