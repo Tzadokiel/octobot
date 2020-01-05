@@ -22,7 +22,7 @@ bot.on('guildMemberAdd', member =>{
     .setTitle('Nouvel Arrivant')
     .setColor(0x000F84)
     .setAuthor("Bienvenue à Bord !!", member.user.avatarURL)
-    .setDescription(`Hey ! Salut à toi, ${member.user} (${member.name})! Tu es ici sur le serveur discord de la communauté ${member.guild.name}, tu es invité à lire le ${reglement} . Tu as pour le moment un rôle restreint afin d'avoir accès à tout le discord nous t'invitons à faire une petite ${presentation} puis à contacter un membre du Staff pour l'entretien !`);
+    .setDescription(`Hey ! Salut à toi, ${member.user} ! Tu es ici sur le serveur discord de la communauté ${member.guild.name}, tu es invité à lire le ${reglement} . Tu as pour le moment un rôle restreint afin d'avoir accès à tout le discord nous t'invitons à faire une petite ${presentation} puis à contacter un membre du Staff pour l'entretien !`);
     member.guild.channels.find("name", "accueil").send(embed);
     member.addRole(role);
     
@@ -36,7 +36,7 @@ bot.on('guildMemberRemove', member =>{
     .setTitle('Départ')
     .setColor(0x000F84)
     .setAuthor("Un utilisateur a quitté le serveur", member.user.avatarURL)
-    .setDescription(`${member.user} ( ${member.name} ) s'est barré !!`)
+    .setDescription(`${member.user} s'est barré !!`)
     member.guild.channels.find("name", "quartier-maître").send(embed);
 });
 
