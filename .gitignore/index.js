@@ -15,14 +15,14 @@ bot.on('ready', () => {
 });
 
 bot.on('guildMemberAdd', member =>{
-    var role = member.guild.roles.find('name', 'Mousse');
+    var role = member.guild.roles.find('name', 'Docker');
     var reglement = member.guild.channels.find("name", "reglement");
     var presentation = member.guild.channels.find("name", "presentation");
     const embed = new Discord.RichEmbed()
     .setTitle('Nouvel Arrivant')
     .setColor(0x000F84)
     .setAuthor("Bienvenue à Bord !!", member.user.avatarURL)
-    .setDescription(`Hey ! Salut à toi, ${member.user} (${membre.user.name})! Tu es ici sur le serveur discord de la communauté ${member.guild.name}, tu es invité à lire le ${reglement} et à faire une petite ${presentation} afin que l'on te connaisse un peu plus !`);
+    .setDescription(`Hey ! Salut à toi, ${member.user} (${membre.user.name})! Tu es ici sur le serveur discord de la communauté ${member.guild.name}, tu es invité à lire le ${reglement} . Tu as pour le moment un rôle restreint afin d'avoir accès à tout le discord nous t'invitons à faire une petite ${presentation} puis à contacter un membre du Staff pour l'entretien !`);
     member.guild.channels.find("name", "accueil").send(embed);
     member.addRole(role);
     
@@ -36,7 +36,7 @@ bot.on('guildMemberRemove', member =>{
     .setTitle('Départ')
     .setColor(0x000F84)
     .setAuthor("Un utilisateur a quitté le serveur", member.user.avatarURL)
-    .setDescription(`${member.user} (${membre.user.name}) s'est barré !!`)
+    .setDescription(`${member.user} ( ${membre.user.name} ) s'est barré !!`)
     member.guild.channels.find("name", "quartier-maître").send(embed);
 });
 
@@ -106,8 +106,7 @@ bot.on('message', message => {
         "Rainbow 6 : Siege",
         "Apex Legends",
         "Sea of Thieves",
-        "Black Ops 4",
-        "Mousse"
+        "Black Ops 4"
     ];
 
     var reussite = 0;
